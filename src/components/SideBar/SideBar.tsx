@@ -21,6 +21,7 @@ import {
 } from "../../Colors";
 import "./Sidebar.css";
 import logo from "../../assets/logo.png";
+import logoLight from "../../assets/logo-light.png";
 import enFlag from "../../assets/us.svg";
 import itFlag from "../../assets/it.svg";
 import "../Fonts.css";
@@ -82,11 +83,9 @@ export default function Navbar() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           <Image
-            src={logo}
+            src={logoLight}
             height="12"
             alt="Il cortile Malpensa Logo"
-            opacity={scrolled ? 1 : 0}
-            transition="opacity 0.4s ease"
           />
         </Flex>
 
