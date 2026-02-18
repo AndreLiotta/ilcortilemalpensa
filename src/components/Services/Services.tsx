@@ -5,9 +5,10 @@ import {
   ScaleFade,
   Grid,
   GridItem,
+  Box,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { headings, light } from "../../Colors";
+import { headings, light, textColor, accent, displayFont, bodyFont } from "../../Colors";
 import parkingIcon from "@mui/icons-material/LocalParkingOutlined";
 import airportShuttleIcon from "@mui/icons-material/AirportShuttleOutlined";
 import breakfastIcon from "@mui/icons-material/BakeryDiningOutlined";
@@ -26,7 +27,7 @@ interface ServiceCardProps {
 }
 
 export default function Services() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const services: Array<ServiceCardProps> = [
     {
@@ -67,47 +68,62 @@ export default function Services() {
       alignItems="center"
       justifyContent="center"
       flexDirection="column"
-      pb={{ base: "8", md: "12" }}
+      py={{ base: "12", md: "20" }}
+      px="6"
       id="services"
-      mb="2.5em"
+      bg={light}
     >
+      {/* Section title */}
+      <Flex alignItems="center" gap="4" mb="4">
+        <Box w="40px" h="1px" bg={accent} />
+        <Text
+          fontSize={{ base: "3xl", md: "5xl" }}
+          fontFamily={displayFont}
+          color={headings}
+        >
+          {t("services")}
+        </Text>
+        <Box w="40px" h="1px" bg={accent} />
+      </Flex>
+
       <Text
-        fontSize={{ base: "3xl", md: "4xl" }}
-        fontFamily="Cormorant"
-        fontWeight="bold"
-        pb="0.5em"
-        color={headings}
-      >
-        {t("services")}
-      </Text>
-      <Text
-        fontSize={{ base: "md", md: "xl" }}
-        pb="0.7em"
-        width={{ base: "90%", md: "80%" }}
+        fontSize={{ base: "md", md: "lg" }}
+        fontFamily={bodyFont}
+        mb="2"
+        width={{ base: "90%", md: "60%" }}
         textAlign="center"
-        color={headings}
+        color={textColor}
+        lineHeight="1.8"
       >
         {t("servicesText1")}
       </Text>
       <Text
-        fontSize={{ base: "md", md: "xl" }}
-        pb="1.5em"
-        width={{ base: "90%", md: "80%" }}
+        fontSize={{ base: "md", md: "lg" }}
+        fontFamily={bodyFont}
+        mb={{ base: "8", md: "12" }}
+        width={{ base: "90%", md: "60%" }}
         textAlign="center"
-        color={headings}
+        color={textColor}
+        lineHeight="1.8"
       >
         {t("servicesText2")}
         <br />
         {t("servicesText3")}
       </Text>
-      <Grid templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(3, 1fr)" }}>
+
+      <Grid
+        templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(3, 1fr)" }}
+        gap={{ base: "4", md: "6" }}
+        maxW="1000px"
+        width="100%"
+      >
         {services.map((service: ServiceCardProps, index) => (
-          <GridItem pb="1.5em" key={index}>
+          <GridItem key={index}>
             <ServiceCard
               icon={service.icon}
               title={service.title}
               text={service.text}
-            ></ServiceCard>
+            />
           </GridItem>
         ))}
       </Grid>
@@ -125,39 +141,45 @@ const ServiceCard = ({ icon, title, text }: ServiceCardProps) => {
   );
 
   return (
-    <ScaleFade
-      initialScale={0.9}
-      in={enterCount > 0}
-    >
+    <ScaleFade initialScale={0.9} in={enterCount > 0}>
       <Flex
-        flexDirection="column"
         ref={ref}
+        flexDirection="column"
         alignItems="center"
-        justifyContent="center"
-        color={headings}
+        justifyContent="flex-start"
+        bg="white"
+        borderRadius="xl"
+        p={{ base: "5", md: "8" }}
+        border="1px solid"
+        borderColor="#E8E3D8"
+        transition="all 0.3s ease"
+        _hover={{
+          transform: "translateY(-4px)",
+          shadow: "lg",
+        }}
+        minH={{ base: "auto", md: "220px" }}
       >
         <Icon
-          fontSize={{ base: "32", md: "48" }}
-          _groupHover={{
-            color: light,
-          }}
+          fontSize={{ base: "32", md: "40" }}
           as={icon}
-          color={headings}
+          color={accent}
+          mb="3"
         />
         <Text
-          fontFamily="Cormorant"
-          fontWeight="bold"
-          fontStyle="italic"
-          fontSize={{ base: "lg", md: "2xl" }}
-          maxWidth="7.5em"
+          fontFamily={displayFont}
+          fontSize={{ base: "md", md: "xl" }}
           textAlign="center"
+          color={headings}
+          mb="2"
         >
           {title}
         </Text>
         <Text
+          fontFamily={bodyFont}
           align="center"
-          fontSize={{ base: "sm", md: "lg" }}
-          w={{ base: "60%", md: "40%" }}
+          fontSize={{ base: "sm", md: "md" }}
+          color={textColor}
+          lineHeight="1.6"
         >
           {text}
         </Text>

@@ -1,18 +1,11 @@
 import {
   Image,
   Flex,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
   Box,
   Grid,
   GridItem,
   Text,
   Icon,
-  ScaleFade,
 } from "@chakra-ui/react";
 import doubleRoom from "../../assets/doubleRoom.jpg";
 import double1 from "../../assets/double1.jpg";
@@ -45,7 +38,7 @@ import Giardino9 from "../../assets/Gallery/giardino9.jpg";
 
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
-import { backgroundBrown, headings } from "../../Colors";
+import { backgroundBrown, headings, accent, displayFont } from "../../Colors";
 import "./Gallery.css";
 import Footer from "../Footer/Footer";
 import backButtonIcon from "@mui/icons-material/ArrowBack";
@@ -53,186 +46,87 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 
 const pictures: any[] = [
-  {
-    src: "",
-    title: "doubleRoomTitle",
-    isPic: false,
-  },
-  {
-    src: double3,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: doubleRoom,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: double2,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: double1,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: double4,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: double5,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: double6,
-    title: "titolo",
-    isPic: true,
-  },
-
-  {
-    src: "",
-    title: "familyRoomTitle",
-    isPic: false,
-  },
-  {
-    src: familyRoom,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: family1,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: family2,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: family3,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: family4,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: family5,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: family6,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: family7,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: family8,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: family9,
-    title: "titolo",
-    isPic: true,
-  },
-
-
-
-  {
-    src: "",
-    title: "outside",
-    isPic: false,
-  },
-  {
-    src: Giardino1,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: Giardino2,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: Giardino3,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: Giardino4,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: Giardino5,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: Giardino6,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: Giardino7,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: Giardino8,
-    title: "titolo",
-    isPic: true,
-  },
-  {
-    src: Giardino9,
-    title: "titolo",
-    isPic: true,
-  },
+  { src: "", title: "doubleRoomTitle", isPic: false },
+  { src: double3, title: "doubleRoomTitle", isPic: true },
+  { src: doubleRoom, title: "doubleRoomTitle", isPic: true },
+  { src: double2, title: "doubleRoomTitle", isPic: true },
+  { src: double1, title: "doubleRoomTitle", isPic: true },
+  { src: double4, title: "doubleRoomTitle", isPic: true },
+  { src: double5, title: "doubleRoomTitle", isPic: true },
+  { src: double6, title: "doubleRoomTitle", isPic: true },
+  { src: "", title: "familyRoomTitle", isPic: false },
+  { src: familyRoom, title: "familyRoomTitle", isPic: true },
+  { src: family1, title: "familyRoomTitle", isPic: true },
+  { src: family2, title: "familyRoomTitle", isPic: true },
+  { src: family3, title: "familyRoomTitle", isPic: true },
+  { src: family4, title: "familyRoomTitle", isPic: true },
+  { src: family5, title: "familyRoomTitle", isPic: true },
+  { src: family6, title: "familyRoomTitle", isPic: true },
+  { src: family7, title: "familyRoomTitle", isPic: true },
+  { src: family8, title: "familyRoomTitle", isPic: true },
+  { src: family9, title: "familyRoomTitle", isPic: true },
+  { src: "", title: "outside", isPic: false },
+  { src: Giardino1, title: "outside", isPic: true },
+  { src: Giardino2, title: "outside", isPic: true },
+  { src: Giardino3, title: "outside", isPic: true },
+  { src: Giardino4, title: "outside", isPic: true },
+  { src: Giardino5, title: "outside", isPic: true },
+  { src: Giardino6, title: "outside", isPic: true },
+  { src: Giardino7, title: "outside", isPic: true },
+  { src: Giardino8, title: "outside", isPic: true },
+  { src: Giardino9, title: "outside", isPic: true },
 ];
+
 export default function Gallery() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   return (
-    <Box w="full" h="full" bgColor={backgroundBrown}>
-      <Flex alignItems="center" mt="1em" mb="1em">
-        <Icon
-          mx="1em"
-          color={headings}
-          as={backButtonIcon}
-          aria-label="Back button"
-          _hover={{ cursor: "pointer" }}
+    <Box w="full" minH="100vh" bgColor={backgroundBrown}>
+      {/* Top bar */}
+      <Flex
+        alignItems="center"
+        px={{ base: "4", md: "8" }}
+        py="5"
+        bg={backgroundBrown}
+        position="sticky"
+        top="0"
+        zIndex="100"
+        borderBottom="1px solid"
+        borderColor="#E8E3D8"
+      >
+        <Flex
+          alignItems="center"
+          cursor="pointer"
           onClick={() => navigate(-1)}
-        />
+          _hover={{ color: accent }}
+          transition="color 0.3s"
+          color={headings}
+          mr="6"
+        >
+          <Icon as={backButtonIcon} w={6} h={6} />
+        </Flex>
         <Text
-          fontSize={{ base: "3xl", md: "4xl" }}
-          fontFamily="Cormorant"
-          fontWeight="bold"
-          color={headings}          
+          fontSize={{ base: "2xl", md: "3xl" }}
+          fontFamily={displayFont}
+          color={headings}
         >
           {t("gallery")}
         </Text>
       </Flex>
-      <Grid
-        templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(4, 1fr)" }}
-        alignItems="center"
-      >
-        {pictures.map((pic, index) => renderPicOrTitle(pic, index))}
-      </Grid>
-      <Footer></Footer>
+
+      {/* Gallery grid */}
+      <Box px={{ base: "2", md: "8" }} py={{ base: "4", md: "8" }}>
+        <Grid
+          templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(3, 1fr)" }}
+          gap={{ base: "2", md: "4" }}
+          maxW="1200px"
+          mx="auto"
+        >
+          {pictures.map((pic, index) => renderPicOrTitle(pic, index))}
+        </Grid>
+      </Box>
+
+      <Footer />
     </Box>
   );
 }
@@ -240,75 +134,68 @@ export default function Gallery() {
 function renderPicOrTitle(pic: any, index: number) {
   if (pic.isPic) {
     return (
-      <GridItem pb="1.5em" key={index}>
-        <ScaleFade initialScale={1} in={true} whileHover={{ scale: 1.03 }}>
-          <GalleryPicture img={pic.src} title={pic.title}></GalleryPicture>
-        </ScaleFade>
+      <GridItem key={index}>
+        <GalleryPicture img={pic.src} title={pic.title} />
       </GridItem>
     );
   } else {
     return (
       <GridItem
-        pb="0.5em"
         key={index}
-        colSpan={{ base: 2, md: 4 }}
-        justifyContent="center"
-        textAlign="center"
+        colSpan={{ base: 2, md: 3 }}
+        py={{ base: "4", md: "6" }}
       >
-        <Text
-          fontSize={{ base: "xl", md: "2xl" }}
-          fontFamily="cormorant"
-          fontWeight="bold"
-          color={headings}
-        >
-          {i18n.t(pic.title)}
-        </Text>
+        <Flex alignItems="center" justifyContent="center" gap="4">
+          <Box w="30px" h="1px" bg={accent} />
+          <Text
+            fontSize={{ base: "xl", md: "2xl" }}
+            fontFamily={displayFont}
+            color={headings}
+          >
+            {i18n.t(pic.title)}
+          </Text>
+          <Box w="30px" h="1px" bg={accent} />
+        </Flex>
       </GridItem>
     );
   }
 }
 
 function GalleryPicture({ img, title }: { img: string; title: string }) {
-  //const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
+  const { t } = useTranslation();
   return (
-    <>
-      <Flex
-        justifyContent="center"
+    <Box
+      className="gallery-item"
+      position="relative"
+      overflow="hidden"
+      borderRadius="lg"
+      ref={initialRef}
+    >
+      <Image
+        src={img}
+        alt={`${t(title)} — B&B Il Cortile Malpensa`}
+        width="100%"
+        height="100%"
+        objectFit="cover"
+        transition="transform 0.5s ease"
+        className="gallery-image"
+        style={{ aspectRatio: "4/3" }}
+      />
+      <Box
+        className="gallery-overlay"
+        position="absolute"
+        top="0"
+        left="0"
+        right="0"
+        bottom="0"
+        bg="rgba(59, 74, 43, 0.3)"
+        opacity="0"
+        transition="opacity 0.4s ease"
+        display="flex"
         alignItems="center"
-        padding={{ base: "0.5em", md: "1em" }}
-        ref={initialRef}
-        tabIndex={-1}
-      >
-        <Image
-          src={img}
-          //onClick={onOpen}
-          height="full"
-          width="full"
-          borderRadius="lg"
-          //_hover={{ cursor: "pointer" }}
-          shadow="md"
-        ></Image>
-      </Flex>
-      {/* <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        size={{ base: "md", md: "md" }}
-        isCentered
-        initialFocusRef={initialRef}
-      >
-        <ModalOverlay />
-        <ModalContent
-          backgroundColor={backgroundBrown}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <ModalCloseButton size="lg" variant="ghost" color={headings} />
-          <ModalBody padding="0">
-            <Image src={img} w="100%" h="100%" borderRadius="md"></Image>
-          </ModalBody>
-        </ModalContent>
-      </Modal> */}
-    </>
+        justifyContent="center"
+      />
+    </Box>
   );
 }

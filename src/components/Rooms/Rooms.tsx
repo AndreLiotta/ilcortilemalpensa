@@ -1,6 +1,6 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Text, Box } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { headings } from "../../Colors";
+import { headings, textColor, displayFont, bodyFont, accent } from "../../Colors";
 import RoomCard from "../RoomCard/RoomCard";
 
 import doubleRoom from "../../assets/doubleRoom.jpg";
@@ -48,85 +48,66 @@ const doubleRoomCards: string[] = [
 ];
 
 export default function Rooms() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <Flex
       width="100%"
       alignItems="center"
       justifyContent="center"
       flexDirection="column"
-      pb={{ base: "8", md: "12" }}
-      mb="2.5em"
+      py={{ base: "12", md: "20" }}
+      px="6"
       id="rooms"
+      bg="#FAF7F2"
     >
+      {/* Section title with decorative line */}
+      <Flex alignItems="center" gap="4" mb="4">
+        <Box w="40px" h="1px" bg={accent} />
+        <Text
+          fontSize={{ base: "3xl", md: "5xl" }}
+          fontFamily={displayFont}
+          color={headings}
+        >
+          {t("rooms")}
+        </Text>
+        <Box w="40px" h="1px" bg={accent} />
+      </Flex>
+
       <Text
-        fontSize={{ base: "3xl", md: "4xl" }}
-        fontFamily="Cormorant"
-        fontWeight="bold"
-        py="0.2em"
-        color={headings}
-      >
-        {t("rooms")}
-      </Text>
-      <Text
-        fontSize={{ base: "md", md: "xl" }}
-        pb="0.7em"
-        width={{ base: "90%", md: "80%" }}
+        fontSize={{ base: "md", md: "lg" }}
+        fontFamily={bodyFont}
+        mb={{ base: "8", md: "12" }}
+        width={{ base: "90%", md: "60%" }}
         textAlign="center"
-        color={headings}
+        color={textColor}
+        lineHeight="1.8"
       >
         {t("roomsText")}
       </Text>
-      <Flex
-        width={{ base: "90%", md: "80%" }}
-        alignItems="center"
-        justifyContent="space-around"
-      >
-        <Flex
-          direction="column"
-          width={{ base: "90%", md: "80%" }}
-          alignItems="center"
-        >
-          <RoomCard
-            img={doubleRoom}
-            text={t("doubleRoomText")}
-            title={t("doubleRoomTitle")}
-            cards={doubleRoomCards}
-            price={t("doubleRoomPrice")}
-          />
-          <Text
-            fontFamily="Cormorant"
-            fontSize={{ base: "md", md: "xl" }}
-            fontWeight="semibold"
-            color={headings}
-            mt="1.5"
-          >
-            {t("doubleRoomTitle")}
-          </Text>
-        </Flex>
 
-        <Flex
-          direction="column"
-          width={{ base: "90%", md: "80%" }}
-          alignItems="center"
-        >
-          <RoomCard
-            img={familyRoom}
-            text={t("familyRoomText")}
-            title={t("familyRoomTitle")}
-            cards={familyRoomCards}
-            price={t("familyRoomPrice")}
-          />
-          <Text
-            fontFamily="Cormorant"
-            fontSize={{ base: "md", md: "xl" }}
-            fontWeight="semibold"
-            color={headings}
-            mt="1.5"
-          >
-            {t("familyRoomTitle")}
-          </Text>
-        </Flex>
+      {/* Room cards side by side */}
+      <Flex
+        width={{ base: "100%", md: "90%" }}
+        maxW="1200px"
+        gap={{ base: "6", md: "8" }}
+        direction={{ base: "column", md: "row" }}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <RoomCard
+          img={doubleRoom}
+          text={t("doubleRoomText")}
+          title={t("doubleRoomTitle")}
+          cards={doubleRoomCards}
+          price={t("doubleRoomPrice")}
+        />
+        <RoomCard
+          img={familyRoom}
+          text={t("familyRoomText")}
+          title={t("familyRoomTitle")}
+          cards={familyRoomCards}
+          price={t("familyRoomPrice")}
+        />
       </Flex>
     </Flex>
   );

@@ -1,44 +1,90 @@
 <!DOCTYPE html>
-<html translate="no">
+<html lang="it" translate="no">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#3B4A2B" />
     <meta
       name="description"
-      content="Bed and Breakfast Il cortile"
+      content="B&B Il Cortile — Bed and Breakfast a Casorate Sempione, a pochi minuti dall'aeroporto di Milano Malpensa. Camere confortevoli, parcheggio gratuito e servizio navetta aeroportuale."
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.ilcortilemalpensa.com/" />
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>Il cortile B&B</title>
+    <!-- Geo meta tags for local SEO -->
+    <meta name="geo.region" content="IT-VA" />
+    <meta name="geo.placename" content="Casorate Sempione" />
+    <meta name="geo.position" content="45.5985;8.7572" />
+    <meta name="ICBM" content="45.5985, 8.7572" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="B&B Il Cortile — Bed and Breakfast vicino Malpensa" />
+    <meta property="og:description" content="Bed and Breakfast a Casorate Sempione, a pochi minuti dall'aeroporto di Milano Malpensa. Camere confortevoli, parcheggio gratuito e servizio navetta." />
+    <meta property="og:url" content="https://www.ilcortilemalpensa.com/" />
+    <meta property="og:image" content="https://www.ilcortilemalpensa.com/og-image.jpg" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:locale:alternate" content="en_GB" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="B&B Il Cortile — Bed and Breakfast vicino Malpensa" />
+    <meta name="twitter:description" content="Bed and Breakfast a Casorate Sempione, a pochi minuti dall'aeroporto di Milano Malpensa. Camere confortevoli, parcheggio gratuito e servizio navetta." />
+    <meta name="twitter:image" content="https://www.ilcortilemalpensa.com/og-image.jpg" />
+
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>B&B Il Cortile — Bed and Breakfast vicino Malpensa</title>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LodgingBusiness",
+      "name": "B&B Il Cortile",
+      "description": "Bed and Breakfast a Casorate Sempione, a pochi minuti dall'aeroporto di Milano Malpensa. Camere confortevoli, parcheggio gratuito e servizio navetta aeroportuale.",
+      "url": "https://www.ilcortilemalpensa.com",
+      "telephone": "+393471106528",
+      "email": "ilcortile@hotmail.it",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Torino 63",
+        "addressLocality": "Casorate Sempione",
+        "addressRegion": "VA",
+        "postalCode": "21011",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.5985,
+        "longitude": 8.7572
+      },
+      "image": "https://www.ilcortilemalpensa.com/og-image.jpg",
+      "priceRange": "€€",
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "Parcheggio gratuito", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Wi-Fi gratuito", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Navetta aeroportuale", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Aria condizionata", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Colazione inclusa", "value": true }
+      ],
+      "checkinTime": "14:00",
+      "checkoutTime": "10:30",
+      "starRating": {
+        "@type": "Rating",
+        "ratingValue": "3"
+      }
+    }
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>

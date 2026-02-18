@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ChakraProvider, theme } from "@chakra-ui/react";
-import Sidebar from "./components/SideBar/SideBar";
+import Navbar from "./components/SideBar/SideBar";
 import Hero from "./components/Hero/Hero";
 import Rooms from "./components/Rooms/Rooms";
 import Services from "./components/Services/Services";
@@ -10,16 +10,21 @@ import Footer from "./components/Footer/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Gallery from "./components/Gallery/Gallery";
 
-export default function App() {
-  const children = [
-    <Hero />,
-    <Rooms />,
-    <Services />,
-    <Where />,
-    <Info />,
-    <Footer />,
-  ];
+function HomePage() {
+  return (
+    <>
+      <Navbar />
+      <Hero />
+      <Rooms />
+      <Services />
+      <Where />
+      <Info />
+      <Footer />
+    </>
+  );
+}
 
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -27,7 +32,7 @@ export default function App() {
           path="/"
           element={
             <ChakraProvider theme={theme}>
-              <Sidebar children={children}></Sidebar>
+              <HomePage />
             </ChakraProvider>
           }
         />

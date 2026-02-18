@@ -2,27 +2,34 @@ import {
   Flex,
   Text,
   Icon,
-  ScaleFade,
+  Box,
 } from "@chakra-ui/react";
-import { headings } from "../../Colors";
+import { headings, textColor, accent, light, displayFont, bodyFont } from "../../Colors";
 import { useTranslation } from "react-i18next";
 import whatsappIcon from "@mui/icons-material/WhatsApp";
 import mailIcon from "@mui/icons-material/MailOutline";
 import phoneIcon from "@mui/icons-material/PhoneOutlined";
 import "../Fonts.css";
+import { IconType } from "react-icons";
 
 export default function Info() {
   const { t, i18n } = useTranslation();
 
-  function infoButtonAction(action : string) {
-    if (action == "email") {
-      window.open('mailto:ilcortile@hotmail.it');
-    } else if (action == "phone") {
-      window.open('tel:00393471106528')
-    } else if(action =="whatsapp") {
-      window.open('https://api.whatsapp.com/send?phone=393471106528')
+  function infoButtonAction(action: string) {
+    if (action === "email") {
+      window.open("mailto:ilcortile@hotmail.it");
+    } else if (action === "phone") {
+      window.open("tel:00393471106528");
+    } else if (action === "whatsapp") {
+      window.open("https://api.whatsapp.com/send?phone=393471106528");
     }
   }
+
+  const contactButtons = [
+    { action: "email", icon: mailIcon, label: "Email" },
+    { action: "phone", icon: phoneIcon, label: i18n.language === "it" ? "Chiama" : "Call" },
+    { action: "whatsapp", icon: whatsappIcon, label: "WhatsApp" },
+  ];
 
   return (
     <Flex
@@ -30,83 +37,83 @@ export default function Info() {
       alignItems="center"
       justifyContent="center"
       flexDirection="column"
-      pb={{ base: "8", md: "12" }}
+      py={{ base: "12", md: "20" }}
+      px="6"
       id="info"
-      mb="2.5em"
+      bg={light}
     >
+      {/* Decorative divider */}
+      <Box w="60px" h="1px" bg={accent} mb="8" />
+
+      <Flex alignItems="center" gap="4" mb="4">
+        <Box w="40px" h="1px" bg={accent} />
+        <Text
+          fontSize={{ base: "3xl", md: "5xl" }}
+          fontFamily={displayFont}
+          color={headings}
+        >
+          {t("info")}
+        </Text>
+        <Box w="40px" h="1px" bg={accent} />
+      </Flex>
+
       <Text
-        fontSize={{ base: "3xl", md: "4xl" }}
-        fontFamily="Cormorant"
-        fontWeight="bold"
-        pb="0.5em"
-        color={headings}
-      >
-        {t("info")}
-      </Text>
-      <Text
-        fontSize={{ base: "md", md: "xl" }}
-        pb="1em"
-        width={{ base: "90%", md: "80%" }}
+        fontSize={{ base: "md", md: "lg" }}
+        fontFamily={bodyFont}
+        mb={{ base: "8", md: "10" }}
+        width={{ base: "90%", md: "60%" }}
         textAlign="center"
-        color={headings}
+        color={textColor}
+        lineHeight="1.8"
       >
         {t("infoText")}
       </Text>
-      <Flex width={{ base: "80%", md: "40%" }} justifyContent="space-between">
-        <ScaleFade initialScale={1} in={true} whileHover={{ scale: 1.1 }}>
+
+      {/* Pill-shaped contact buttons */}
+      <Flex
+        gap={{ base: "3", md: "6" }}
+        flexWrap="wrap"
+        justifyContent="center"
+      >
+        {contactButtons.map((btn) => (
           <Flex
-            border="solid 5px"
+            key={btn.action}
+            alignItems="center"
+            gap="3"
+            px={{ base: "5", md: "8" }}
+            py={{ base: "3", md: "4" }}
+            borderRadius="full"
+            border="2px solid"
             borderColor={headings}
-            borderRadius="50"
-            onClick={() => infoButtonAction("email")}
-            mx="1.5"
-            _hover={{cursor: "pointer"}}
+            cursor="pointer"
+            onClick={() => infoButtonAction(btn.action)}
+            transition="all 0.3s ease"
+            _hover={{
+              bg: headings,
+              color: "white",
+            }}
+            role="group"
           >
             <Icon
-              as={mailIcon}
-              w={{ base: 8, md: 10 }}
-              h={{ base: 8, md: 10 }}
-              margin={{base: "0.5em" , md: "0.8em"}}
+              as={btn.icon as IconType}
+              w={{ base: 5, md: 6 }}
+              h={{ base: 5, md: 6 }}
               color={headings}
-            ></Icon>
-          </Flex>
-        </ScaleFade>
-        <ScaleFade initialScale={1} in={true} whileHover={{ scale: 1.1 }}>
-          <Flex
-            border="solid 5px"
-            borderColor={headings}
-            borderRadius="50"
-            onClick={() => infoButtonAction("phone")}
-            mx="1.5"
-            _hover={{cursor: "pointer"}}
-          >
-            <Icon
-              as={phoneIcon}
-              w={{ base: 8, md: 10 }}
-              h={{ base: 8, md: 10 }}
-              margin={{base: "0.5em" , md: "0.8em"}}
+              _groupHover={{ color: "white" }}
+              transition="color 0.3s ease"
+            />
+            <Text
+              fontFamily={bodyFont}
+              fontWeight="600"
+              fontSize={{ base: "sm", md: "md" }}
               color={headings}
-            ></Icon>
+              _groupHover={{ color: "white" }}
+              transition="color 0.3s ease"
+            >
+              {btn.label}
+            </Text>
           </Flex>
-        </ScaleFade>
-        <ScaleFade initialScale={1} in={true} whileHover={{ scale: 1.1 }}>
-          <Flex
-            border="solid 5px"
-            borderColor={headings}
-            borderRadius="50"
-            onClick={() => infoButtonAction("whatsapp")}
-            mx="1.5"
-            _hover={{cursor: "pointer"}}
-          >
-            <Icon
-              as={whatsappIcon}
-              w={{ base: 8, md: 10 }}
-              h={{ base: 8, md: 10 }}
-              margin={{base: "0.5em" , md: "0.8em"}}
-              color={headings}
-            ></Icon>
-          </Flex>
-        </ScaleFade>
+        ))}
       </Flex>
     </Flex>
   );

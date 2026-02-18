@@ -1,2 +1,7 @@
+.room-card:hover .room-card-image {
+  transform: scale(1.05);
+}
 
-
+.room-card:hover .room-card-overlay {
+  opacity: 1 !important;
+}
