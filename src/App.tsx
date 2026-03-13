@@ -9,6 +9,7 @@ import Info from "./components/Info/Info";
 import Footer from "./components/Footer/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Gallery from "./components/Gallery/Gallery";
+import CanonicalTag from "./components/CanonicalTag";
 
 function HomePage() {
   return (
@@ -27,6 +28,7 @@ function HomePage() {
 export default function App() {
   return (
     <BrowserRouter>
+      <CanonicalTag />
       <Routes>
         <Route
           path="/"
