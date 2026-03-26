@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/SideBar/SideBar';
@@ -20,7 +20,7 @@ function LangSync() {
   const { lang } = useParams<{ lang: string }>();
   const { i18n } = useTranslation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (lang && SUPPORTED_LANGS.includes(lang) && i18n.language !== lang) {
       i18n.changeLanguage(lang);
     }
