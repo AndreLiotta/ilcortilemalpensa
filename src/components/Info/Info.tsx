@@ -42,9 +42,6 @@ export default function Info() {
       id="info"
       bg={light}
     >
-      {/* Decorative divider */}
-      <Box w="60px" h="1px" bg={accent} mb="8" />
-
       <Flex alignItems="center" gap="4" mb="4">
         <Box w="40px" h="1px" bg={accent} />
         <Text

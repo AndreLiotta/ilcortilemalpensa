@@ -11,7 +11,3 @@ body {
 .gallery-item:hover .gallery-image {
   transform: scale(1.05);
 }
-
-.gallery-item:hover .gallery-overlay {
-  opacity: 1 !important;
-}

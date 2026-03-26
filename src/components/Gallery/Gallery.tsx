@@ -45,7 +45,13 @@ import backButtonIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate, useParams } from "react-router-dom";
 import React from "react";
 
-const pictures: any[] = [
+interface GalleryItem {
+  src: string;
+  title: string;
+  isPic: boolean;
+}
+
+const pictures: GalleryItem[] = [
   { src: "", title: "doubleRoomTitle", isPic: false },
   { src: double3, title: "doubleRoomTitle", isPic: true },
   { src: doubleRoom, title: "doubleRoomTitle", isPic: true },
@@ -132,7 +138,7 @@ export default function Gallery() {
   );
 }
 
-function renderPicOrTitle(pic: any, index: number) {
+function renderPicOrTitle(pic: GalleryItem, index: number) {
   if (pic.isPic) {
     return (
       <GridItem key={index}>
@@ -182,20 +188,6 @@ function GalleryPicture({ img, title }: { img: string; title: string }) {
         transition="transform 0.5s ease"
         className="gallery-image"
         style={{ aspectRatio: "4/3" }}
-      />
-      <Box
-        className="gallery-overlay"
-        position="absolute"
-        top="0"
-        left="0"
-        right="0"
-        bottom="0"
-        bg="rgba(59, 74, 43, 0.3)"
-        opacity="0"
-        transition="opacity 0.4s ease"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
       />
     </Box>
   );

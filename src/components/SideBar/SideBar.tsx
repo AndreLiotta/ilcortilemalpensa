@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import {
   IconButton,
@@ -229,18 +229,18 @@ interface MobileNavProps {
 }
 
 const MobileNav = ({ onOpen, scrolled }: MobileNavProps) => {
-  const [yOffset, setYOffset] = useState(window.pageYOffset);
   const [visible, setVisible] = useState(true);
+  const yOffsetRef = useRef(window.pageYOffset);
 
   useEffect(() => {
     function handleScroll() {
       const currentYOffset = window.pageYOffset;
-      setVisible(yOffset > currentYOffset || currentYOffset < 80);
-      setYOffset(currentYOffset);
+      setVisible(yOffsetRef.current > currentYOffset || currentYOffset < 80);
+      yOffsetRef.current = currentYOffset;
     }
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  });
+  }, []);
 
   return (
     <Flex
