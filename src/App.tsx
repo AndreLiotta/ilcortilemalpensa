@@ -12,6 +12,7 @@ import Where from './components/Where/Where';
 import Info from './components/Info/Info';
 import Footer from './components/Footer/Footer';
 import Gallery from './components/Gallery/Gallery';
+import SEOHead from './components/SEOHead/SEOHead';
 
 const SUPPORTED_LANGS = ['it', 'en'];
 
@@ -31,6 +32,7 @@ function LangSync() {
 function HomePage() {
   return (
     <>
+      <SEOHead page="home" />
       <Navbar />
       <Hero />
       <Rooms />
@@ -54,7 +56,7 @@ function LangLayout() {
       <LangSync />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/gallery" element={<><SEOHead page="gallery" /><Gallery /></>} />
         <Route path="*" element={<Navigate to={`/${lang}/`} replace />} />
       </Routes>
     </ChakraProvider>
