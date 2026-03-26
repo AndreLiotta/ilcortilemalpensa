@@ -42,7 +42,7 @@ import { backgroundBrown, headings, accent, displayFont } from "../../Colors";
 import "./Gallery.css";
 import Footer from "../Footer/Footer";
 import backButtonIcon from "@mui/icons-material/ArrowBack";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import React from "react";
 
 const pictures: any[] = [
@@ -80,6 +80,7 @@ const pictures: any[] = [
 export default function Gallery() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { lang } = useParams<{ lang: string }>();
   return (
     <Box w="full" minH="100vh" bgColor={backgroundBrown}>
       {/* Top bar */}
@@ -97,7 +98,7 @@ export default function Gallery() {
         <Flex
           alignItems="center"
           cursor="pointer"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate(`/${lang}/`)}
           _hover={{ color: accent }}
           transition="color 0.3s"
           color={headings}
