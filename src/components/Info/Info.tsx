@@ -3,6 +3,7 @@ import {
   Text,
   Icon,
   Box,
+  Button,
 } from "@chakra-ui/react";
 import { headings, textColor, accent, light, displayFont, bodyFont } from "../../Colors";
 import { useTranslation } from "react-i18next";
@@ -17,11 +18,11 @@ export default function Info() {
 
   function infoButtonAction(action: string) {
     if (action === "email") {
-      window.open("mailto:ilcortile@hotmail.it");
+      window.open("mailto:ilcortile@hotmail.it", "_blank", "noopener,noreferrer");
     } else if (action === "phone") {
-      window.open("tel:00393471106528");
+      window.open("tel:00393471106528", "_blank", "noopener,noreferrer");
     } else if (action === "whatsapp") {
-      window.open("https://api.whatsapp.com/send?phone=393471106528");
+      window.open("https://api.whatsapp.com/send?phone=393471106528", "_blank", "noopener,noreferrer");
     }
   }
 
@@ -73,43 +74,35 @@ export default function Info() {
         justifyContent="center"
       >
         {contactButtons.map((btn) => (
-          <Flex
+          <Button
             key={btn.action}
-            alignItems="center"
-            gap="3"
+            variant="outline"
+            leftIcon={
+              <Icon
+                as={btn.icon as IconType}
+                w={{ base: 5, md: 6 }}
+                h={{ base: 5, md: 6 }}
+              />
+            }
             px={{ base: "5", md: "8" }}
-            py={{ base: "3", md: "4" }}
+            py={{ base: "6", md: "7" }}
             borderRadius="full"
             border="2px solid"
             borderColor={headings}
-            cursor="pointer"
+            color={headings}
+            bg="transparent"
+            fontFamily={bodyFont}
+            fontWeight="600"
+            fontSize={{ base: "sm", md: "md" }}
             onClick={() => infoButtonAction(btn.action)}
             transition="all 0.3s ease"
             _hover={{
               bg: headings,
               color: "white",
             }}
-            role="group"
           >
-            <Icon
-              as={btn.icon as IconType}
-              w={{ base: 5, md: 6 }}
-              h={{ base: 5, md: 6 }}
-              color={headings}
-              _groupHover={{ color: "white" }}
-              transition="color 0.3s ease"
-            />
-            <Text
-              fontFamily={bodyFont}
-              fontWeight="600"
-              fontSize={{ base: "sm", md: "md" }}
-              color={headings}
-              _groupHover={{ color: "white" }}
-              transition="color 0.3s ease"
-            >
-              {btn.label}
-            </Text>
-          </Flex>
+            {btn.label}
+          </Button>
         ))}
       </Flex>
     </Flex>

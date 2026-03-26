@@ -15,9 +15,9 @@ export default function Footer() {
 
   function openPdf() {
     if (i18n.language === "it") {
-      window.open(privacyPolicy);
+      window.open(privacyPolicy, "_blank", "noopener,noreferrer");
     } else if (i18n.language === "en") {
-      window.open(privacyPolicyEn);
+      window.open(privacyPolicyEn, "_blank", "noopener,noreferrer");
     }
   }
 

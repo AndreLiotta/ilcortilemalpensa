@@ -7,6 +7,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import Navbar from './components/SideBar/SideBar';
 import Hero from './components/Hero/Hero';
+import SkipToContent from './components/SkipToContent/SkipToContent';
 import Rooms from './components/Rooms/Rooms';
 import Services from './components/Services/Services';
 import Where from './components/Where/Where';
@@ -33,6 +34,7 @@ function LangSync() {
 function HomePage() {
   return (
     <>
+      <SkipToContent />
       <SEOHead page="home" />
       <Navbar />
       <Hero />

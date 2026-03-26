@@ -6,6 +6,7 @@ import {
   GridItem,
   Text,
   Icon,
+  Button,
 } from "@chakra-ui/react";
 import doubleRoom from "../../assets/doubleRoom.jpg";
 import double1 from "../../assets/double1.jpg";
@@ -101,17 +102,19 @@ export default function Gallery() {
         borderBottom="1px solid"
         borderColor={borderLight}
       >
-        <Flex
-          alignItems="center"
-          cursor="pointer"
+        <Button
+          variant="ghost"
+          aria-label="Back to home"
           onClick={() => navigate(`/${lang}/`)}
           _hover={{ color: accent }}
           transition="color 0.3s"
           color={headings}
           mr="6"
+          p="0"
+          minW="auto"
         >
           <Icon as={backButtonIcon} w={6} h={6} />
-        </Flex>
+        </Button>
         <Text
           fontSize={{ base: "2xl", md: "3xl" }}
           fontFamily={displayFont}

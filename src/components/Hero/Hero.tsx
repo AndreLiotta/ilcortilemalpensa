@@ -108,6 +108,7 @@ export default function Hero() {
           bottom="6"
           className="scroll-indicator"
           zIndex="1"
+          aria-hidden="true"
         >
           <Icon as={FiChevronDown} w={7} h={7} color="white" opacity={0.7} />
         </Box>

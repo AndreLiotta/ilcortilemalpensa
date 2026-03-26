@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Flex,
   Button,
@@ -42,6 +43,15 @@ function RoomCard({
       width={{ base: "90%", md: "45%" }}
       cursor="pointer"
       onClick={onOpen}
+      onKeyDown={(e: React.KeyboardEvent) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen();
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label={title}
     >
       {/* Image with 16:10 aspect ratio */}
       <Box

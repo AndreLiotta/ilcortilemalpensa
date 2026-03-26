@@ -9,7 +9,7 @@ export default function Where() {
   const { t } = useTranslation();
 
   function openInMaps() {
-    window.open("https://goo.gl/maps/ybBDCuyTGoUn93GW6");
+    window.open("https://goo.gl/maps/ybBDCuyTGoUn93GW6", "_blank", "noopener,noreferrer");
   }
 
   return (
