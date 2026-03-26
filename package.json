@@ -26,6 +26,7 @@
     "react-icons": "^3.11.0",
     "react-in-viewport": "^1.0.0-alpha.29",
     "react-map-gl": "^7.0.21",
+    "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "typescript": "^4.9.5",
@@ -53,7 +54,6 @@
     ]
   },
   "devDependencies": {
-    "@types/react-slick": "^0.23.10",
-    "react-router-dom": "^6.9.0"
+    "@types/react-slick": "^0.23.10"
   }
 }
