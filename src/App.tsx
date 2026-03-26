@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-
 import { useLayoutEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HelmetProvider } from 'react-helmet-async';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import Navbar from './components/SideBar/SideBar';
 import Hero from './components/Hero/Hero';
 import Rooms from './components/Rooms/Rooms';
@@ -66,13 +67,15 @@ function LangLayout() {
 export default function App() {
   return (
     <HelmetProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/it/" replace />} />
-          <Route path="/gallery" element={<Navigate to="/it/gallery" replace />} />
-          <Route path="/:lang/*" element={<LangLayout />} />
-        </Routes>
-      </BrowserRouter>
+      <ErrorBoundary>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Navigate to="/it/" replace />} />
+            <Route path="/gallery" element={<Navigate to="/it/gallery" replace />} />
+            <Route path="/:lang/*" element={<LangLayout />} />
+          </Routes>
+        </BrowserRouter>
+      </ErrorBoundary>
     </HelmetProvider>
   );
 }
