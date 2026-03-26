@@ -1,18 +1,23 @@
 import * as React from 'react';
-import { ChakraProvider, theme } from '@chakra-ui/react';
+import { Suspense } from 'react';
+import { ChakraProvider, theme, Box } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HelmetProvider } from 'react-helmet-async';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import Navbar from './components/SideBar/SideBar';
 import Hero from './components/Hero/Hero';
+import SkipToContent from './components/SkipToContent/SkipToContent';
 import Rooms from './components/Rooms/Rooms';
 import Services from './components/Services/Services';
 import Where from './components/Where/Where';
 import Info from './components/Info/Info';
 import Footer from './components/Footer/Footer';
-import Gallery from './components/Gallery/Gallery';
 import SEOHead from './components/SEOHead/SEOHead';
+import { backgroundBrown } from './Colors';
+
+const Gallery = React.lazy(() => import('./components/Gallery/Gallery'));
 
 const SUPPORTED_LANGS = ['it', 'en'];
 
@@ -32,6 +37,7 @@ function LangSync() {
 function HomePage() {
   return (
     <>
+      <SkipToContent />
       <SEOHead page="home" />
       <Navbar />
       <Hero />
@@ -56,7 +62,12 @@ function LangLayout() {
       <LangSync />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/gallery" element={<><SEOHead page="gallery" /><Gallery /></>} />
+        <Route path="/gallery" element={
+          <Suspense fallback={<Box minH="100vh" bg={backgroundBrown} />}>
+            <SEOHead page="gallery" />
+            <Gallery />
+          </Suspense>
+        } />
         <Route path="*" element={<Navigate to={`/${lang}/`} replace />} />
       </Routes>
     </ChakraProvider>
@@ -66,13 +77,15 @@ function LangLayout() {
 export default function App() {
   return (
     <HelmetProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/it/" replace />} />
-          <Route path="/gallery" element={<Navigate to="/it/gallery" replace />} />
-          <Route path="/:lang/*" element={<LangLayout />} />
-        </Routes>
-      </BrowserRouter>
+      <ErrorBoundary>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Navigate to="/it/" replace />} />
+            <Route path="/gallery" element={<Navigate to="/it/gallery" replace />} />
+            <Route path="/:lang/*" element={<LangLayout />} />
+          </Routes>
+        </BrowserRouter>
+      </ErrorBoundary>
     </HelmetProvider>
   );
 }

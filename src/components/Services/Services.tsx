@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Flex,
   Text,
@@ -8,20 +9,14 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { headings, light, textColor, accent, displayFont, bodyFont } from "../../Colors";
-import parkingIcon from "@mui/icons-material/LocalParkingOutlined";
-import airportShuttleIcon from "@mui/icons-material/AirportShuttleOutlined";
-import breakfastIcon from "@mui/icons-material/BakeryDiningOutlined";
-import wifiIcon from "@mui/icons-material/Wifi";
-import airConditioningIcon from "@mui/icons-material/AcUnitOutlined";
-import petFriendlyIcon from "@mui/icons-material/PetsOutlined";
-import { useRef } from "react";
-import { IconType } from "react-icons";
-import { useInViewport } from "react-in-viewport";
+import { headings, light, textColor, accent, displayFont, bodyFont, borderLight } from "../../Colors";
+import { MdLocalParking, MdAirportShuttle, MdBakeryDining, MdAcUnit, MdPets } from "react-icons/md";
+import { FiWifi } from "react-icons/fi";
+import { useInView } from "react-intersection-observer";
 import "../Fonts.css";
 
 interface ServiceCardProps {
-  icon: IconType;
+  icon: React.ElementType;
   title: string;
   text: string;
 }
@@ -30,36 +25,12 @@ export default function Services() {
   const { t } = useTranslation();
 
   const services: Array<ServiceCardProps> = [
-    {
-      icon: airportShuttleIcon as IconType,
-      title: t("airportShuttle"),
-      text: t("airportShuttleText"),
-    },
-    {
-      icon: parkingIcon as IconType,
-      title: t("parking"),
-      text: t("parkingText"),
-    },
-    {
-      icon: breakfastIcon as IconType,
-      title: t("breakfast"),
-      text: t("breakfastText"),
-    },
-    {
-      icon: petFriendlyIcon as IconType,
-      title: t("petFriendly"),
-      text: t("petFriendlyText"),
-    },
-    {
-      icon: wifiIcon as IconType,
-      title: t("wifi"),
-      text: t("wifiText"),
-    },
-    {
-      icon: airConditioningIcon as IconType,
-      title: t("airConditioning"),
-      text: t("airConditioningText"),
-    },
+    { icon: MdAirportShuttle as React.ElementType, title: t("airportShuttle"), text: t("airportShuttleText") },
+    { icon: MdLocalParking as React.ElementType, title: t("parking"), text: t("parkingText") },
+    { icon: MdBakeryDining as React.ElementType, title: t("breakfast"), text: t("breakfastText") },
+    { icon: MdPets as React.ElementType, title: t("petFriendly"), text: t("petFriendlyText") },
+    { icon: FiWifi as React.ElementType, title: t("wifi"), text: t("wifiText") },
+    { icon: MdAcUnit as React.ElementType, title: t("airConditioning"), text: t("airConditioningText") },
   ];
 
   return (
@@ -132,16 +103,13 @@ export default function Services() {
 }
 
 const ServiceCard = ({ icon, title, text }: ServiceCardProps) => {
-  const ref = useRef(null);
-  const { enterCount } = useInViewport(
-    ref,
-    { rootMargin: "-50px" },
-    { disconnectOnLeave: true },
-    {}
-  );
+  const { ref, inView } = useInView({
+    rootMargin: "-50px 0px",
+    triggerOnce: true,
+  });
 
   return (
-    <ScaleFade initialScale={0.9} in={enterCount > 0}>
+    <ScaleFade initialScale={0.9} in={inView}>
       <Flex
         ref={ref}
         flexDirection="column"
@@ -151,7 +119,7 @@ const ServiceCard = ({ icon, title, text }: ServiceCardProps) => {
         borderRadius="xl"
         p={{ base: "5", md: "8" }}
         border="1px solid"
-        borderColor="#E8E3D8"
+        borderColor={borderLight}
         transition="all 0.3s ease"
         _hover={{
           transform: "translateY(-4px)",

@@ -1,34 +1,38 @@
+import React from "react";
 import {
   Flex,
   Text,
   Icon,
   Box,
+  Button,
 } from "@chakra-ui/react";
 import { headings, textColor, accent, light, displayFont, bodyFont } from "../../Colors";
 import { useTranslation } from "react-i18next";
-import whatsappIcon from "@mui/icons-material/WhatsApp";
-import mailIcon from "@mui/icons-material/MailOutline";
-import phoneIcon from "@mui/icons-material/PhoneOutlined";
+import { FiMail, FiPhone } from "react-icons/fi";
+import { SiWhatsapp } from "react-icons/si";
 import "../Fonts.css";
-import { IconType } from "react-icons";
+
+const MailIcon = FiMail as React.ElementType;
+const PhoneIcon = FiPhone as React.ElementType;
+const WhatsappIcon = SiWhatsapp as React.ElementType;
 
 export default function Info() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   function infoButtonAction(action: string) {
     if (action === "email") {
-      window.open("mailto:ilcortile@hotmail.it");
+      window.open("mailto:ilcortile@hotmail.it", "_blank", "noopener,noreferrer");
     } else if (action === "phone") {
-      window.open("tel:00393471106528");
+      window.open("tel:00393471106528", "_blank", "noopener,noreferrer");
     } else if (action === "whatsapp") {
-      window.open("https://api.whatsapp.com/send?phone=393471106528");
+      window.open("https://api.whatsapp.com/send?phone=393471106528", "_blank", "noopener,noreferrer");
     }
   }
 
-  const contactButtons = [
-    { action: "email", icon: mailIcon, label: "Email" },
-    { action: "phone", icon: phoneIcon, label: i18n.language === "it" ? "Chiama" : "Call" },
-    { action: "whatsapp", icon: whatsappIcon, label: "WhatsApp" },
+  const contactButtons: Array<{ action: string; icon: React.ElementType; label: string }> = [
+    { action: "email", icon: MailIcon, label: "Email" },
+    { action: "phone", icon: PhoneIcon, label: t("call") },
+    { action: "whatsapp", icon: WhatsappIcon, label: "WhatsApp" },
   ];
 
   return (
@@ -42,9 +46,6 @@ export default function Info() {
       id="info"
       bg={light}
     >
-      {/* Decorative divider */}
-      <Box w="60px" h="1px" bg={accent} mb="8" />
-
       <Flex alignItems="center" gap="4" mb="4">
         <Box w="40px" h="1px" bg={accent} />
         <Text
@@ -76,43 +77,35 @@ export default function Info() {
         justifyContent="center"
       >
         {contactButtons.map((btn) => (
-          <Flex
+          <Button
             key={btn.action}
-            alignItems="center"
-            gap="3"
+            variant="outline"
+            leftIcon={
+              <Icon
+                as={btn.icon}
+                w={{ base: 5, md: 6 }}
+                h={{ base: 5, md: 6 }}
+              />
+            }
             px={{ base: "5", md: "8" }}
-            py={{ base: "3", md: "4" }}
+            py={{ base: "6", md: "7" }}
             borderRadius="full"
             border="2px solid"
             borderColor={headings}
-            cursor="pointer"
+            color={headings}
+            bg="transparent"
+            fontFamily={bodyFont}
+            fontWeight="600"
+            fontSize={{ base: "sm", md: "md" }}
             onClick={() => infoButtonAction(btn.action)}
             transition="all 0.3s ease"
             _hover={{
               bg: headings,
               color: "white",
             }}
-            role="group"
           >
-            <Icon
-              as={btn.icon as IconType}
-              w={{ base: 5, md: 6 }}
-              h={{ base: 5, md: 6 }}
-              color={headings}
-              _groupHover={{ color: "white" }}
-              transition="color 0.3s ease"
-            />
-            <Text
-              fontFamily={bodyFont}
-              fontWeight="600"
-              fontSize={{ base: "sm", md: "md" }}
-              color={headings}
-              _groupHover={{ color: "white" }}
-              transition="color 0.3s ease"
-            >
-              {btn.label}
-            </Text>
-          </Flex>
+            {btn.label}
+          </Button>
         ))}
       </Flex>
     </Flex>

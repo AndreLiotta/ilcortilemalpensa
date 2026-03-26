@@ -6,46 +6,55 @@ import {
   GridItem,
   Text,
   Icon,
+  Button,
 } from "@chakra-ui/react";
-import doubleRoom from "../../assets/doubleRoom.jpg";
-import double1 from "../../assets/double1.jpg";
-import double2 from "../../assets/double2.jpg";
-import double3 from "../../assets/double3.jpg";
-import double4 from "../../assets/double4.jpg";
-import double5 from "../../assets/double5.jpg";
-import double6 from "../../assets/double6.jpg";
+import doubleRoom from "../../assets/doubleRoom.webp";
+import double1 from "../../assets/double1.webp";
+import double2 from "../../assets/double2.webp";
+import double3 from "../../assets/double3.webp";
+import double4 from "../../assets/double4.webp";
+import double5 from "../../assets/double5.webp";
+import double6 from "../../assets/double6.webp";
 
-import familyRoom from "../../assets/familyRoom.jpg";
-import family1 from "../../assets/family1.jpg";
-import family2 from "../../assets/family2.jpg";
-import family3 from "../../assets/family3.jpg";
-import family4 from "../../assets/family4.jpg";
-import family5 from "../../assets/family5.jpg";
-import family6 from "../../assets/family6.jpg";
-import family7 from "../../assets/family7.jpg";
-import family8 from "../../assets/family8.jpg";
-import family9 from "../../assets/family9.jpg";
+import familyRoom from "../../assets/familyRoom.webp";
+import family1 from "../../assets/family1.webp";
+import family2 from "../../assets/family2.webp";
+import family3 from "../../assets/family3.webp";
+import family4 from "../../assets/family4.webp";
+import family5 from "../../assets/family5.webp";
+import family6 from "../../assets/family6.webp";
+import family7 from "../../assets/family7.webp";
+import family8 from "../../assets/family8.webp";
+import family9 from "../../assets/family9.webp";
 
-import Giardino1 from "../../assets/HeroImg.jpg";
-import Giardino2 from "../../assets/Gallery/giardino2.jpg";
-import Giardino3 from "../../assets/Gallery/giardino3.jpg";
-import Giardino4 from "../../assets/Gallery/giardino4.jpg";
-import Giardino5 from "../../assets/Gallery/giardino5.jpg";
-import Giardino6 from "../../assets/Gallery/giardino6.jpg";
-import Giardino7 from "../../assets/Gallery/giardino7.jpg";
-import Giardino8 from "../../assets/Gallery/giardino8.jpg";
-import Giardino9 from "../../assets/Gallery/giardino9.jpg";
+import Giardino1 from "../../assets/HeroImg.webp";
+import Giardino2 from "../../assets/Gallery/giardino2.webp";
+import Giardino3 from "../../assets/Gallery/giardino3.webp";
+import Giardino4 from "../../assets/Gallery/giardino4.webp";
+import Giardino5 from "../../assets/Gallery/giardino5.webp";
+import Giardino6 from "../../assets/Gallery/giardino6.webp";
+import Giardino7 from "../../assets/Gallery/giardino7.webp";
+import Giardino8 from "../../assets/Gallery/giardino8.webp";
+import Giardino9 from "../../assets/Gallery/giardino9.webp";
 
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
-import { backgroundBrown, headings, accent, displayFont } from "../../Colors";
+import { backgroundBrown, headings, accent, displayFont, borderLight } from "../../Colors";
 import "./Gallery.css";
 import Footer from "../Footer/Footer";
-import backButtonIcon from "@mui/icons-material/ArrowBack";
+import { FiArrowLeft } from "react-icons/fi";
 import { useNavigate, useParams } from "react-router-dom";
 import React from "react";
 
-const pictures: any[] = [
+const ArrowLeftIcon = FiArrowLeft as React.ElementType;
+
+interface GalleryItem {
+  src: string;
+  title: string;
+  isPic: boolean;
+}
+
+const pictures: GalleryItem[] = [
   { src: "", title: "doubleRoomTitle", isPic: false },
   { src: double3, title: "doubleRoomTitle", isPic: true },
   { src: doubleRoom, title: "doubleRoomTitle", isPic: true },
@@ -93,19 +102,21 @@ export default function Gallery() {
         top="0"
         zIndex="100"
         borderBottom="1px solid"
-        borderColor="#E8E3D8"
+        borderColor={borderLight}
       >
-        <Flex
-          alignItems="center"
-          cursor="pointer"
+        <Button
+          variant="ghost"
+          aria-label="Back to home"
           onClick={() => navigate(`/${lang}/`)}
           _hover={{ color: accent }}
           transition="color 0.3s"
           color={headings}
           mr="6"
+          p="0"
+          minW="auto"
         >
-          <Icon as={backButtonIcon} w={6} h={6} />
-        </Flex>
+          <Icon as={ArrowLeftIcon} w={6} h={6} />
+        </Button>
         <Text
           fontSize={{ base: "2xl", md: "3xl" }}
           fontFamily={displayFont}
@@ -132,7 +143,7 @@ export default function Gallery() {
   );
 }
 
-function renderPicOrTitle(pic: any, index: number) {
+function renderPicOrTitle(pic: GalleryItem, index: number) {
   if (pic.isPic) {
     return (
       <GridItem key={index}>
@@ -182,20 +193,7 @@ function GalleryPicture({ img, title }: { img: string; title: string }) {
         transition="transform 0.5s ease"
         className="gallery-image"
         style={{ aspectRatio: "4/3" }}
-      />
-      <Box
-        className="gallery-overlay"
-        position="absolute"
-        top="0"
-        left="0"
-        right="0"
-        bottom="0"
-        bg="rgba(59, 74, 43, 0.3)"
-        opacity="0"
-        transition="opacity 0.4s ease"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
+        loading="lazy"
       />
     </Box>
   );

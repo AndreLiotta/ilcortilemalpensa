@@ -1,11 +1,14 @@
+import React from "react";
 import { Box, Flex, Text, Image, Icon } from "@chakra-ui/react";
-import heroImg from "../../assets/HeroImg.jpg";
-import { headings, displayFont, bodyFont, textColor, accent } from "../../Colors";
+import heroImg from "../../assets/HeroImg.webp";
+import { headings, displayFont, bodyFont, textColor, accent, backgroundBrown } from "../../Colors";
 import "./Hero.css";
 import logoLight from "../../assets/logo-light.png";
 import { useTranslation } from "react-i18next";
 import "../Fonts.css";
 import { FiChevronDown } from "react-icons/fi";
+
+const ChevronDownIcon = FiChevronDown as React.ElementType;
 
 export default function Hero() {
   const { t } = useTranslation();
@@ -108,8 +111,9 @@ export default function Hero() {
           bottom="6"
           className="scroll-indicator"
           zIndex="1"
+          aria-hidden="true"
         >
-          <Icon as={FiChevronDown} w={7} h={7} color="white" opacity={0.7} />
+          <Icon as={ChevronDownIcon} w={7} h={7} color="white" opacity={0.7} />
         </Box>
       </Flex>
 
@@ -117,7 +121,7 @@ export default function Hero() {
       <Flex
         direction="column"
         alignItems="center"
-        bg="#FAF7F2"
+        bg={backgroundBrown}
         py={{ base: "12", md: "20" }}
         px="6"
       >

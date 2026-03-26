@@ -1,23 +1,26 @@
+import React from "react";
 import { Flex, Icon, Text, Link, Box } from "@chakra-ui/react";
 import "../Fonts.css";
 import { headings, light, accent, displayFont, bodyFont } from "../../Colors";
-import mailIcon from "@mui/icons-material/MailOutline";
-import phoneIcon from "@mui/icons-material/PhoneOutlined";
-import whereIcon from "@mui/icons-material/PinDropOutlined";
-import privacyIcon from "@mui/icons-material/PrivacyTipOutlined";
-import codeIcon from "@mui/icons-material/Code";
+import { FiMail, FiPhone, FiMapPin, FiShield, FiCode } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import privacyPolicy from "../../assets/privacyPolicy.pdf";
 import privacyPolicyEn from "../../assets/privacyPolicyen.pdf";
+
+const MailIcon = FiMail as React.ElementType;
+const PhoneIcon = FiPhone as React.ElementType;
+const MapPinIcon = FiMapPin as React.ElementType;
+const ShieldIcon = FiShield as React.ElementType;
+const CodeIcon = FiCode as React.ElementType;
 
 export default function Footer() {
   const { t, i18n } = useTranslation();
 
   function openPdf() {
     if (i18n.language === "it") {
-      window.open(privacyPolicy);
+      window.open(privacyPolicy, "_blank", "noopener,noreferrer");
     } else if (i18n.language === "en") {
-      window.open(privacyPolicyEn);
+      window.open(privacyPolicyEn, "_blank", "noopener,noreferrer");
     }
   }
 
@@ -50,7 +53,7 @@ export default function Footer() {
           </Text>
           <Flex direction="row" alignItems="center" justifyContent="center">
             <Icon
-              as={whereIcon}
+              as={MapPinIcon}
               w={{ base: 4, md: 5 }}
               h={{ base: 4, md: 5 }}
               color={accent}
@@ -87,7 +90,7 @@ export default function Footer() {
             justifyContent="center"
           >
             <Icon
-              as={mailIcon}
+              as={MailIcon}
               w={{ base: 4, md: 5 }}
               h={{ base: 4, md: 5 }}
               color={accent}
@@ -107,7 +110,7 @@ export default function Footer() {
           </Flex>
           <Flex direction="row" alignItems="center" justifyContent="center">
             <Icon
-              as={phoneIcon}
+              as={PhoneIcon}
               w={{ base: 4, md: 5 }}
               h={{ base: 4, md: 5 }}
               color={accent}
@@ -144,7 +147,7 @@ export default function Footer() {
             justifyContent="center"
           >
             <Icon
-              as={privacyIcon}
+              as={ShieldIcon}
               w={{ base: 4, md: 5 }}
               h={{ base: 4, md: 5 }}
               color={accent}
@@ -164,7 +167,7 @@ export default function Footer() {
           </Flex>
           <Flex direction="row" alignItems="center" justifyContent="center">
             <Icon
-              as={codeIcon}
+              as={CodeIcon}
               w={{ base: 4, md: 5 }}
               h={{ base: 4, md: 5 }}
               color={accent}
@@ -176,7 +179,7 @@ export default function Footer() {
               fontSize={{ base: "sm", md: "md" }}
               opacity="0.85"
             >
-              Sito realizzato da: Andrea Liotta
+              {t("madeBy")}
             </Text>
           </Flex>
         </Box>

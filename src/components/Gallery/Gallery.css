@@ -1,6 +1,6 @@
 html {
   scroll-behavior: smooth;
-  background-color: #FAF7F2 !important;
+  background-color: #FAF7F2 !important; /* backgroundBrown token */
 }
 
 body {
@@ -10,8 +10,4 @@ body {
 
 .gallery-item:hover .gallery-image {
   transform: scale(1.05);
-}
-
-.gallery-item:hover .gallery-overlay {
-  opacity: 1 !important;
 }

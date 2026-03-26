@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Flex,
   Button,
@@ -11,7 +12,7 @@ import {
   Text,
   Box,
 } from "@chakra-ui/react";
-import { backgroundBrown, headings, accent, displayFont, bodyFont, textColor } from "../../Colors";
+import { backgroundBrown, headings, accent, displayFont, bodyFont, textColor, accentHover } from "../../Colors";
 import "./RoomCard.css";
 import { useTranslation } from "react-i18next";
 import "../Fonts.css";
@@ -42,6 +43,15 @@ function RoomCard({
       width={{ base: "90%", md: "45%" }}
       cursor="pointer"
       onClick={onOpen}
+      onKeyDown={(e: React.KeyboardEvent) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen();
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label={title}
     >
       {/* Image with 16:10 aspect ratio */}
       <Box
@@ -94,7 +104,7 @@ function RoomCard({
           py="6"
           fontFamily={displayFont}
           fontSize={{ base: "md", md: "xl" }}
-          _hover={{ bg: "#b5633f" }}
+          _hover={{ bg: accentHover }}
         >
           {t("discover")}
         </Button>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import {
   IconButton,
@@ -11,6 +11,7 @@ import {
   Text,
   useDisclosure,
   Image,
+  Box,
 } from "@chakra-ui/react";
 import { FiMenu } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
@@ -26,6 +27,8 @@ import logoLight from "../../assets/logo-light.png";
 import enFlag from "../../assets/us.svg";
 import itFlag from "../../assets/it.svg";
 import "../Fonts.css";
+
+const MenuIcon = FiMenu as React.FC<{ size?: number; color?: string }>;
 
 interface LinkItemProps {
   name: string;
@@ -118,26 +121,44 @@ export default function Navbar() {
 
         {/* Language switcher */}
         <Flex gap="3" alignItems="center">
-          <Image
-            src={itFlag}
-            alt="Italiano"
-            h="24px"
-            cursor="pointer"
-            opacity={lang === "it" ? 1 : 0.6}
-            _hover={{ opacity: 1 }}
-            transition="opacity 0.3s"
+          <Box
+            as="button"
+            aria-label="Italiano"
             onClick={() => onClickLanguageChange("it")}
-          />
-          <Image
-            src={enFlag}
-            alt="English"
-            h="24px"
+            bg="transparent"
+            border="none"
             cursor="pointer"
-            opacity={lang === "en" ? 1 : 0.6}
-            _hover={{ opacity: 1 }}
-            transition="opacity 0.3s"
+            p="0"
+            lineHeight="0"
+          >
+            <Image
+              src={itFlag}
+              alt=""
+              h="24px"
+              opacity={lang === "it" ? 1 : 0.6}
+              _hover={{ opacity: 1 }}
+              transition="opacity 0.3s"
+            />
+          </Box>
+          <Box
+            as="button"
+            aria-label="English"
             onClick={() => onClickLanguageChange("en")}
-          />
+            bg="transparent"
+            border="none"
+            cursor="pointer"
+            p="0"
+            lineHeight="0"
+          >
+            <Image
+              src={enFlag}
+              alt=""
+              h="24px"
+              opacity={lang === "en" ? 1 : 0.6}
+              _hover={{ opacity: 1 }}
+              transition="opacity 0.3s"
+            />
+          </Box>
         </Flex>
       </Flex>
 
@@ -191,30 +212,30 @@ export default function Navbar() {
 
             {/* Bottom: language flags */}
             <Flex justifyContent="center" gap="5" pb="10" flexShrink={0}>
-              <Image
-                src={itFlag}
-                alt="Italiano"
-                h="32px"
+              <Box
+                as="button"
+                aria-label="Italiano"
+                onClick={() => { onClickLanguageChange("it"); onClose(); }}
+                bg="transparent"
+                border="none"
                 cursor="pointer"
-                opacity={lang === "it" ? 1 : 0.6}
-                _hover={{ opacity: 1 }}
-                onClick={() => {
-                  onClickLanguageChange("it");
-                  onClose();
-                }}
-              />
-              <Image
-                src={enFlag}
-                alt="English"
-                h="32px"
+                p="0"
+                lineHeight="0"
+              >
+                <Image src={itFlag} alt="" h="32px" opacity={lang === "it" ? 1 : 0.6} _hover={{ opacity: 1 }} />
+              </Box>
+              <Box
+                as="button"
+                aria-label="English"
+                onClick={() => { onClickLanguageChange("en"); onClose(); }}
+                bg="transparent"
+                border="none"
                 cursor="pointer"
-                opacity={lang === "en" ? 1 : 0.6}
-                _hover={{ opacity: 1 }}
-                onClick={() => {
-                  onClickLanguageChange("en");
-                  onClose();
-                }}
-              />
+                p="0"
+                lineHeight="0"
+              >
+                <Image src={enFlag} alt="" h="32px" opacity={lang === "en" ? 1 : 0.6} _hover={{ opacity: 1 }} />
+              </Box>
             </Flex>
           </Flex>
         </DrawerContent>
@@ -229,18 +250,18 @@ interface MobileNavProps {
 }
 
 const MobileNav = ({ onOpen, scrolled }: MobileNavProps) => {
-  const [yOffset, setYOffset] = useState(window.pageYOffset);
   const [visible, setVisible] = useState(true);
+  const yOffsetRef = useRef(window.pageYOffset);
 
   useEffect(() => {
     function handleScroll() {
       const currentYOffset = window.pageYOffset;
-      setVisible(yOffset > currentYOffset || currentYOffset < 80);
-      setYOffset(currentYOffset);
+      setVisible(yOffsetRef.current > currentYOffset || currentYOffset < 80);
+      yOffsetRef.current = currentYOffset;
     }
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  });
+  }, []);
 
   return (
     <Flex
@@ -273,7 +294,7 @@ const MobileNav = ({ onOpen, scrolled }: MobileNavProps) => {
         variant="ghost"
         onClick={onOpen}
         aria-label="open menu"
-        icon={<FiMenu size={28} color={light} />}
+        icon={<MenuIcon size={28} color={light} />}
         _hover={{ bg: "transparent" }}
       />
     </Flex>
