@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex, Text, Image, Icon } from "@chakra-ui/react";
-import heroImg from "../../assets/HeroImg.jpg";
+import heroImg from "../../assets/HeroImg.webp";
 import { headings, displayFont, bodyFont, textColor, accent, backgroundBrown } from "../../Colors";
 import "./Hero.css";
 import logoLight from "../../assets/logo-light.png";

@@ -1,8 +1,8 @@
 import { Flex, Text, Image, Button, Box } from "@chakra-ui/react";
 import { headings, textColor, accent, displayFont, bodyFont, backgroundBrown, accentHover } from "../../Colors";
 import { useTranslation } from "react-i18next";
-import map from "../../assets/mapimage.png";
-import mapMobile from "../../assets/mapimage-mobile.png";
+import map from "../../assets/mapimage.webp";
+import mapMobile from "../../assets/mapimage-mobile.webp";
 import "../Fonts.css";
 
 export default function Where() {
