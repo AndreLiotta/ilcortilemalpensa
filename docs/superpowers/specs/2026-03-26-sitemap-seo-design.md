@@ -36,9 +36,9 @@ Comprehensive SEO overhaul for the Il Cortile B&B website (ilcortilemalpensa.com
 
 ### Implementation
 
-- `App.tsx`: restructure routes with `/:lang` prefix. Add `<Navigate>` for `/` → `/it/` and `/gallery` → `/it/gallery`.
+- `App.tsx`: restructure routes with `/:lang` prefix. Add `<Navigate>` for `/` → `/it/` and `/gallery` → `/it/gallery`. Add a `/:lang/*` catch-all route that redirects to `/:lang/` for unknown paths. Wrap the app with `<HelmetProvider>` from `react-helmet-async` (must wrap `<BrowserRouter>` or be placed inside it).
 - Create a wrapper component or effect that reads `:lang` from URL params and calls `i18next.changeLanguage(lang)`.
-- `i18n.tsx`: remove `i18next-browser-languagedetector` and browser detection config. Language is set from URL only.
+- `i18n.tsx`: remove `i18next-browser-languagedetector` and browser detection config. Language is set from URL only. Change `fallbackLng` from `'en'` to `'it'` to match the Italian default routing.
 - All internal links (navbar, footer, gallery links) must include the current lang prefix.
 
 ## SEOHead Component
@@ -47,11 +47,12 @@ A new `src/components/SEOHead/SEOHead.tsx` component using `react-helmet-async` 
 
 ### Responsibilities
 
+- **HTML lang attribute**: sets `<html lang="it">` or `<html lang="en">` dynamically via `<Helmet htmlAttributes={{ lang }}>` (overrides the static `lang="it"` in index.html)
 - **Title**: per-route, per-language page titles
 - **Meta description**: per-route, per-language descriptions
 - **Canonical URL**: based on current lang + route
 - **hreflang links**: alternate language versions + x-default
-- **Open Graph tags**: title, description, url, image, locale (switches between `it_IT` and `en_GB`)
+- **Open Graph tags**: title, description, url, image, locale (switches between `it_IT` and `en_GB`). All routes share `og-image.jpg`.
 - **Twitter Card tags**: title, description, image
 - **BreadcrumbList JSON-LD**: per-route breadcrumbs
 - **ImageGallery JSON-LD**: on gallery page only
@@ -210,7 +211,7 @@ Note: The in-app `<Navigate>` components handle the `/` → `/it/` and `/gallery
 | `src/i18n.tsx` | Modified | Remove browser detection, simplify config |
 | `src/components/SEOHead/SEOHead.tsx` | Created | Per-route meta, hreflang, canonical, OG, structured data |
 | `src/components/CanonicalTag.tsx` | Deleted | Replaced by SEOHead |
-| `public/index.html` | Modified | Remove dynamic meta (moved to SEOHead), enrich JSON-LD |
+| `public/index.html` | Modified | Remove `<title>`, `<meta description>`, OG tags, Twitter Card tags (moved to SEOHead). Keep: JSON-LD, geo meta, preconnects, fonts, manifest, favicon, `lang="it"` as fallback. Enrich JSON-LD. |
 | `public/sitemap.xml` | Modified | All 4 URLs with hreflang alternates and lastmod |
 | `vercel.json` | Created | SPA rewrite rule |
 | Navbar/Footer/Gallery components | Modified | Internal links prefixed with current lang |
