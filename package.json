@@ -25,20 +25,15 @@
     "react-intersection-observer": "^10.0.3",
     "react-map-gl": "^7.0.21",
     "react-router-dom": "^6.9.0",
-    "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": {
     "production": [
@@ -53,6 +48,8 @@
     ]
   },
   "devDependencies": {
-    "@types/react-slick": "^0.23.10"
+    "@types/react-slick": "^0.23.10",
+    "@vitejs/plugin-react": "^6.0.1",
+    "vite": "^8.0.3"
   }
 }
