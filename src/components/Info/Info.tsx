@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Flex,
   Text,
@@ -7,11 +8,13 @@ import {
 } from "@chakra-ui/react";
 import { headings, textColor, accent, light, displayFont, bodyFont } from "../../Colors";
 import { useTranslation } from "react-i18next";
-import whatsappIcon from "@mui/icons-material/WhatsApp";
-import mailIcon from "@mui/icons-material/MailOutline";
-import phoneIcon from "@mui/icons-material/PhoneOutlined";
+import { FiMail, FiPhone } from "react-icons/fi";
+import { SiWhatsapp } from "react-icons/si";
 import "../Fonts.css";
-import { IconType } from "react-icons";
+
+const MailIcon = FiMail as React.ElementType;
+const PhoneIcon = FiPhone as React.ElementType;
+const WhatsappIcon = SiWhatsapp as React.ElementType;
 
 export default function Info() {
   const { t } = useTranslation();
@@ -26,10 +29,10 @@ export default function Info() {
     }
   }
 
-  const contactButtons = [
-    { action: "email", icon: mailIcon, label: "Email" },
-    { action: "phone", icon: phoneIcon, label: t("call") },
-    { action: "whatsapp", icon: whatsappIcon, label: "WhatsApp" },
+  const contactButtons: Array<{ action: string; icon: React.ElementType; label: string }> = [
+    { action: "email", icon: MailIcon, label: "Email" },
+    { action: "phone", icon: PhoneIcon, label: t("call") },
+    { action: "whatsapp", icon: WhatsappIcon, label: "WhatsApp" },
   ];
 
   return (
@@ -79,7 +82,7 @@ export default function Info() {
             variant="outline"
             leftIcon={
               <Icon
-                as={btn.icon as IconType}
+                as={btn.icon}
                 w={{ base: 5, md: 6 }}
                 h={{ base: 5, md: 6 }}
               />

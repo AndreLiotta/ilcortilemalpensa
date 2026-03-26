@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import {
   IconButton,
@@ -27,6 +27,8 @@ import logoLight from "../../assets/logo-light.png";
 import enFlag from "../../assets/us.svg";
 import itFlag from "../../assets/it.svg";
 import "../Fonts.css";
+
+const MenuIcon = FiMenu as React.FC<{ size?: number; color?: string }>;
 
 interface LinkItemProps {
   name: string;
@@ -292,7 +294,7 @@ const MobileNav = ({ onOpen, scrolled }: MobileNavProps) => {
         variant="ghost"
         onClick={onOpen}
         aria-label="open menu"
-        icon={<FiMenu size={28} color={light} />}
+        icon={<MenuIcon size={28} color={light} />}
         _hover={{ bg: "transparent" }}
       />
     </Flex>

@@ -2,8 +2,10 @@ import React from "react";
 import { Box, IconButton, useBreakpointValue } from "@chakra-ui/react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import Slider from "react-slick";
-
 import { headings, light } from "../../Colors";
+
+const LeftArrow = BiLeftArrowAlt as React.FC;
+const RightArrow = BiRightArrowAlt as React.FC;
 
 const settings = {
   dots: true,
@@ -29,18 +31,7 @@ export default function Carousel({ cards }: { cards: string[] }) {
       width={"4xl"}
       overflow={"hidden"}
     >
-      <link
-        rel="stylesheet"
-        type="text/css"
-        charSet="UTF-8"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-      />
-      <IconButton
+<IconButton
         aria-label="left-arrow"
         bg={light}
         color={headings}
@@ -54,7 +45,7 @@ export default function Carousel({ cards }: { cards: string[] }) {
         zIndex={2}
         onClick={() => slider?.slickPrev()}
       >
-        <BiLeftArrowAlt />
+        <LeftArrow />
       </IconButton>
       <IconButton
         aria-label="right-arrow"
@@ -70,7 +61,7 @@ export default function Carousel({ cards }: { cards: string[] }) {
         zIndex={2}
         onClick={() => slider?.slickNext()}
       >
-        <BiRightArrowAlt />
+        <RightArrow />
       </IconButton>
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
         {cards.map((url, index) => (

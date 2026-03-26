@@ -42,9 +42,11 @@ import i18n from "i18next";
 import { backgroundBrown, headings, accent, displayFont, borderLight } from "../../Colors";
 import "./Gallery.css";
 import Footer from "../Footer/Footer";
-import backButtonIcon from "@mui/icons-material/ArrowBack";
+import { FiArrowLeft } from "react-icons/fi";
 import { useNavigate, useParams } from "react-router-dom";
 import React from "react";
+
+const ArrowLeftIcon = FiArrowLeft as React.ElementType;
 
 interface GalleryItem {
   src: string;
@@ -113,7 +115,7 @@ export default function Gallery() {
           p="0"
           minW="auto"
         >
-          <Icon as={backButtonIcon} w={6} h={6} />
+          <Icon as={ArrowLeftIcon} w={6} h={6} />
         </Button>
         <Text
           fontSize={{ base: "2xl", md: "3xl" }}
