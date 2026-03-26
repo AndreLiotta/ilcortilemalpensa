@@ -191,6 +191,7 @@ function GalleryPicture({ img, title }: { img: string; title: string }) {
         transition="transform 0.5s ease"
         className="gallery-image"
         style={{ aspectRatio: "4/3" }}
+        loading="lazy"
       />
     </Box>
   );

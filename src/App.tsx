@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ChakraProvider, theme } from '@chakra-ui/react';
+import { Suspense } from 'react';
+import { ChakraProvider, theme, Box } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -13,8 +14,10 @@ import Services from './components/Services/Services';
 import Where from './components/Where/Where';
 import Info from './components/Info/Info';
 import Footer from './components/Footer/Footer';
-import Gallery from './components/Gallery/Gallery';
 import SEOHead from './components/SEOHead/SEOHead';
+import { backgroundBrown } from './Colors';
+
+const Gallery = React.lazy(() => import('./components/Gallery/Gallery'));
 
 const SUPPORTED_LANGS = ['it', 'en'];
 
@@ -59,7 +62,12 @@ function LangLayout() {
       <LangSync />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/gallery" element={<><SEOHead page="gallery" /><Gallery /></>} />
+        <Route path="/gallery" element={
+          <Suspense fallback={<Box minH="100vh" bg={backgroundBrown} />}>
+            <SEOHead page="gallery" />
+            <Gallery />
+          </Suspense>
+        } />
         <Route path="*" element={<Navigate to={`/${lang}/`} replace />} />
       </Routes>
     </ChakraProvider>

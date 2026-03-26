@@ -107,6 +107,7 @@ export default function Where() {
             shadow="xl"
             display={{ base: "none", md: "block" }}
             w="100%"
+            loading="lazy"
           />
           <Image
             src={mapMobile}
@@ -115,6 +116,7 @@ export default function Where() {
             shadow="xl"
             display={{ base: "block", md: "none" }}
             w="100%"
+            loading="lazy"
           />
         </Box>
       </Flex>
