@@ -18,14 +18,15 @@
     "@types/react-dom": "^18.0.11",
     "framer-motion": "^6.5.1",
     "i18next": "^22.4.10",
-    "i18next-browser-languagedetector": "^7.0.1",
     "mapbox-gl": "^2.13.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet-async": "^3.0.0",
     "react-i18next": "^12.2.0",
     "react-icons": "^3.11.0",
     "react-in-viewport": "^1.0.0-alpha.29",
     "react-map-gl": "^7.0.21",
+    "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "typescript": "^4.9.5",
@@ -53,7 +54,6 @@
     ]
   },
   "devDependencies": {
-    "@types/react-slick": "^0.23.10",
-    "react-router-dom": "^6.9.0"
+    "@types/react-slick": "^0.23.10"
   }
 }

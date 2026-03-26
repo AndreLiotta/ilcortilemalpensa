@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import {
   IconButton,
   CloseButton,
@@ -31,14 +32,6 @@ interface LinkItemProps {
   link: string;
 }
 
-const LinkItems: Array<LinkItemProps> = [
-  { name: "rooms", link: "#rooms" },
-  { name: "services", link: "#services" },
-  { name: "where", link: "#where" },
-  { name: "info", link: "#info" },
-  { name: "gallery", link: "/gallery" },
-];
-
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [scrolled, setScrolled] = useState(false);
@@ -51,10 +44,23 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const { t, i18n } = useTranslation();
-  const onClickLanguageChange = (lang: string) => {
-    i18n.changeLanguage(lang);
+  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const onClickLanguageChange = (newLang: string) => {
+    const currentPath = location.pathname.replace(`/${lang}`, `/${newLang}`);
+    navigate(currentPath);
   };
+
+  const linkItems: Array<LinkItemProps> = [
+    { name: "rooms", link: `/${lang}/#rooms` },
+    { name: "services", link: `/${lang}/#services` },
+    { name: "where", link: `/${lang}/#where` },
+    { name: "info", link: `/${lang}/#info` },
+    { name: "gallery", link: `/${lang}/gallery` },
+  ];
 
   return (
     <>
@@ -91,7 +97,7 @@ export default function Navbar() {
 
         {/* Nav links */}
         <Flex gap="8" alignItems="center">
-          {LinkItems.map((item) => (
+          {linkItems.map((item) => (
             <Link
               key={item.name}
               href={item.link}
@@ -117,7 +123,7 @@ export default function Navbar() {
             alt="Italiano"
             h="24px"
             cursor="pointer"
-            opacity={i18n.language === "it" ? 1 : 0.6}
+            opacity={lang === "it" ? 1 : 0.6}
             _hover={{ opacity: 1 }}
             transition="opacity 0.3s"
             onClick={() => onClickLanguageChange("it")}
@@ -127,7 +133,7 @@ export default function Navbar() {
             alt="English"
             h="24px"
             cursor="pointer"
-            opacity={i18n.language === "en" ? 1 : 0.6}
+            opacity={lang === "en" ? 1 : 0.6}
             _hover={{ opacity: 1 }}
             transition="opacity 0.3s"
             onClick={() => onClickLanguageChange("en")}
@@ -166,7 +172,7 @@ export default function Navbar() {
               pt="6"
             >
               <Image src={logo} height="20" alt="Il cortile Malpensa Logo" mb="6" />
-              {LinkItems.map((item) => (
+              {linkItems.map((item) => (
                 <Link
                   key={item.name}
                   href={item.link}
@@ -190,7 +196,7 @@ export default function Navbar() {
                 alt="Italiano"
                 h="32px"
                 cursor="pointer"
-                opacity={i18n.language === "it" ? 1 : 0.6}
+                opacity={lang === "it" ? 1 : 0.6}
                 _hover={{ opacity: 1 }}
                 onClick={() => {
                   onClickLanguageChange("it");
@@ -202,7 +208,7 @@ export default function Navbar() {
                 alt="English"
                 h="32px"
                 cursor="pointer"
-                opacity={i18n.language === "en" ? 1 : 0.6}
+                opacity={lang === "en" ? 1 : 0.6}
                 _hover={{ opacity: 1 }}
                 onClick={() => {
                   onClickLanguageChange("en");
