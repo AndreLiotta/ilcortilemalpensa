@@ -13,8 +13,13 @@ const resources = {
   },
 };
 
+// Detect language from URL before React renders — prevents flash of wrong language
+const pathLang = window.location.pathname.split('/')[1];
+const initialLang = ['it', 'en'].includes(pathLang) ? pathLang : 'it';
+
 i18next.use(initReactI18next).init({
   resources,
+  lng: initialLang,
   fallbackLng: 'it',
   interpolation: {
     escapeValue: false,
