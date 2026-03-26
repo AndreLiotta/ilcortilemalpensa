@@ -1,6 +1,6 @@
 import { Flex, Text, Box } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { headings, textColor, displayFont, bodyFont, accent } from "../../Colors";
+import { headings, textColor, displayFont, bodyFont, accent, backgroundBrown } from "../../Colors";
 import RoomCard from "../RoomCard/RoomCard";
 
 import doubleRoom from "../../assets/doubleRoom.jpg";
@@ -58,7 +58,7 @@ export default function Rooms() {
       py={{ base: "12", md: "20" }}
       px="6"
       id="rooms"
-      bg="#FAF7F2"
+      bg={backgroundBrown}
     >
       {/* Section title with decorative line */}
       <Flex alignItems="center" gap="4" mb="4">

@@ -38,7 +38,7 @@ import Giardino9 from "../../assets/Gallery/giardino9.jpg";
 
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
-import { backgroundBrown, headings, accent, displayFont } from "../../Colors";
+import { backgroundBrown, headings, accent, displayFont, borderLight } from "../../Colors";
 import "./Gallery.css";
 import Footer from "../Footer/Footer";
 import backButtonIcon from "@mui/icons-material/ArrowBack";
@@ -93,7 +93,7 @@ export default function Gallery() {
         top="0"
         zIndex="100"
         borderBottom="1px solid"
-        borderColor="#E8E3D8"
+        borderColor={borderLight}
       >
         <Flex
           alignItems="center"

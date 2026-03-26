@@ -11,7 +11,7 @@ import {
   Text,
   Box,
 } from "@chakra-ui/react";
-import { backgroundBrown, headings, accent, displayFont, bodyFont, textColor } from "../../Colors";
+import { backgroundBrown, headings, accent, displayFont, bodyFont, textColor, accentHover } from "../../Colors";
 import "./RoomCard.css";
 import { useTranslation } from "react-i18next";
 import "../Fonts.css";
@@ -94,7 +94,7 @@ function RoomCard({
           py="6"
           fontFamily={displayFont}
           fontSize={{ base: "md", md: "xl" }}
-          _hover={{ bg: "#b5633f" }}
+          _hover={{ bg: accentHover }}
         >
           {t("discover")}
         </Button>

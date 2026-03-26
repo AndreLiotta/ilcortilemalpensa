@@ -8,7 +8,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { headings, light, textColor, accent, displayFont, bodyFont } from "../../Colors";
+import { headings, light, textColor, accent, displayFont, bodyFont, borderLight } from "../../Colors";
 import parkingIcon from "@mui/icons-material/LocalParkingOutlined";
 import airportShuttleIcon from "@mui/icons-material/AirportShuttleOutlined";
 import breakfastIcon from "@mui/icons-material/BakeryDiningOutlined";
@@ -151,7 +151,7 @@ const ServiceCard = ({ icon, title, text }: ServiceCardProps) => {
         borderRadius="xl"
         p={{ base: "5", md: "8" }}
         border="1px solid"
-        borderColor="#E8E3D8"
+        borderColor={borderLight}
         transition="all 0.3s ease"
         _hover={{
           transform: "translateY(-4px)",

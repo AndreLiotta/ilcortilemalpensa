@@ -1,5 +1,5 @@
 import { Flex, Text, Image, Button, Box } from "@chakra-ui/react";
-import { headings, textColor, accent, displayFont, bodyFont } from "../../Colors";
+import { headings, textColor, accent, displayFont, bodyFont, backgroundBrown, accentHover } from "../../Colors";
 import { useTranslation } from "react-i18next";
 import map from "../../assets/mapimage.png";
 import mapMobile from "../../assets/mapimage-mobile.png";
@@ -21,7 +21,7 @@ export default function Where() {
       py={{ base: "12", md: "20" }}
       px="6"
       id="where"
-      bg="#FAF7F2"
+      bg={backgroundBrown}
     >
       {/* Section title */}
       <Flex alignItems="center" gap="4" mb="4">
@@ -91,7 +91,7 @@ export default function Where() {
             fontSize={{ base: "md", md: "lg" }}
             borderRadius="full"
             px="8"
-            _hover={{ bg: "#b5633f" }}
+            _hover={{ bg: accentHover }}
             transition="all 0.3s ease"
           >
             {t("openInMaps")}
