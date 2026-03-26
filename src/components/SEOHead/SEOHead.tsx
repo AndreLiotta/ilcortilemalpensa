@@ -82,8 +82,6 @@ export default function SEOHead({ page }: SEOHeadProps) {
   const { lang } = useParams<{ lang: string }>();
   const currentLang = lang === 'en' ? 'en' : 'it';
   const meta = seoData[currentLang][page];
-  const alternateLang = currentLang === 'it' ? 'en' : 'it';
-
   const canonicalUrl = `${BASE_URL}/${currentLang}${meta.path}`;
   const ogLocale = currentLang === 'it' ? 'it_IT' : 'en_GB';
   const ogLocaleAlt = currentLang === 'it' ? 'en_GB' : 'it_IT';
