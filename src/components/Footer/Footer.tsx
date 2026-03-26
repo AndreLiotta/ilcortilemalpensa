@@ -176,7 +176,7 @@ export default function Footer() {
               fontSize={{ base: "sm", md: "md" }}
               opacity="0.85"
             >
-              Sito realizzato da: Andrea Liotta
+              {t("madeBy")}
             </Text>
           </Flex>
         </Box>

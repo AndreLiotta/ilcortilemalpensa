@@ -13,7 +13,7 @@ import "../Fonts.css";
 import { IconType } from "react-icons";
 
 export default function Info() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   function infoButtonAction(action: string) {
     if (action === "email") {
@@ -27,7 +27,7 @@ export default function Info() {
 
   const contactButtons = [
     { action: "email", icon: mailIcon, label: "Email" },
-    { action: "phone", icon: phoneIcon, label: i18n.language === "it" ? "Chiama" : "Call" },
+    { action: "phone", icon: phoneIcon, label: t("call") },
     { action: "whatsapp", icon: whatsappIcon, label: "WhatsApp" },
   ];
 
